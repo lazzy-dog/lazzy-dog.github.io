@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | The Private Space</title>
+  <title>双端队列 | The Private Space</title>
   
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="The Private Space">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="此篇为实现双端队列过程中遇到的问题和想法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双端队列">
+<meta property="og:url" content="http://example.com/2021/02/03/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="The Private Space">
+<meta property="og:description" content="此篇为实现双端队列过程中遇到的问题和想法">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-03T04:19:24.000Z">
+<meta property="article:modified_time" content="2021-02-03T12:48:57.526Z">
 <meta property="article:author" content="Lirs">
+<meta property="article:tag" content="学习-数据结构">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="The Private Space" type="application/atom+xml">
@@ -172,73 +177,148 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-双端队列" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/03/%E6%98%8E%E6%97%A5%E4%BB%BB%E5%8A%A1/" class="archive-article-date">
-  	<time datetime="2021-02-03T13:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/03/%E6%98%8E%E6%97%A5%E4%BB%BB%E5%8A%A1/">任务</a>
+    <h1 class="article-title" itemprop="name">
+      双端队列
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">任务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/03/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/" class="archive-article-date">
+        
+        <a href="/2021/02/03/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/" class="archive-article-date">
   	<time datetime="2021-02-03T04:19:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/03/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/">双端队列</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <table>
+<thead>
+<tr>
+<th><strong>此篇为实现双端队列过程中遇到的问题和想法</strong></th>
+</tr>
+</thead>
+</table>
+<a id="more"></a>
+<p>#双端队列</p>
+<p>##双端队列的线性队列 </p>
+<p>1.我们首先要解决的东西是从左（右）进队既能从左出还能从右出的策  </p>
+<pre><code>   1 #include&quot;h_Public.h&quot;                                            
+    2 
+    3 #define MaxSize 4
+    4 
+    5 typedef struct Squeue&#123;
+    6     int data[MaxSize];
+    7 
+    8     int Front,Rear;
+    9 &#125;Squeue;
+    10 
+    11 int InitQueue(Squeue *P)&#123;
+    12     P-&gt;Front = 0;P-&gt;Rear = 1;
+    13     return 1;
+    14 &#125;
+    以上是定义代码和初始化代码，为什么是0和1因为我们的目标是让他们两个无论在任何时候都能顺利访问对方的区域，画个圆环就能理解；
+        16 int isEmpty(Squeue *P)&#123;
+        17     if(P-&gt;Front+1 == P-&gt;Rear)&#123;
+        18         printf(&quot;1此队列是空的\n&quot;);
+        19         return 1;
+        20     &#125;else&#123;
+        21         printf(&quot;2次队列非空\n&quot;);
+        22         return 0;
+        23     &#125;
+        24 &#125;
+        25 
+        26 int isFull(Squeue *P)&#123;
+        27     if(P-&gt;Rear == P-&gt;Front)&#123;
+        28         printf(&quot;3此队列满了\n&quot;);
+        29         return 1;
+        30     &#125;else&#123;
+        31        // printf(&quot;4此队列是非满的\n&quot;);
+        32         return  0;
+        33     &#125;
+        34 &#125;
+        这个判空是思想是放弃一个存储空间的思想；
+            36 int LPush(Squeue *P,int x)&#123;
+            37     if(isFull(P)==1)&#123;
+            38         printf(&quot;===5此队列为满\n===&quot;);
+            39         return 0;
+            40     &#125;else&#123;
+            41     P-&gt;data[P-&gt;Front] = x;
+            42     P-&gt;Front = (P-&gt;Front-1)%MaxSize;
+            43     return 1;
+            44     &#125;
+            45 &#125;
+            46 
+            47 int RPush(Squeue *P,int x)&#123;
+            48     if(isFull(P)==1)&#123;
+            49         printf(&quot;=6=此队列为满\n==&quot;);
+            50         return 0;
+            51     &#125;else&#123;
+            52         P-&gt;data[P-&gt;Rear] = x;
+            53         P-&gt;Rear = (P-&gt;Rear+1)%MaxSize;
+            54         return 1;
+            55     &#125;
+            56 &#125;
+            这个是写入用的，分左右，也是画个图就能理解；
+                58 int LPop(Squeue *P)&#123;
+                59     if(isEmpty(P)==1)&#123;
+                60         printf(&quot;==7队列为空==\n&quot;);
+                61         return 0;
+                62     &#125;else&#123;
+                63         int x=0;
+                64         P-&gt;Front = (P-&gt;Front+1)%MaxSize;                        
+                65         x = P-&gt;data[P-&gt;Front];
+                66         return x;
+                67     &#125;
+                68 &#125;
+                69 
+                70 int RPop(Squeue *P)&#123;
+                71     if(isEmpty(P)==1)&#123;
+                72         printf(&quot;==队8列为空==\n&quot;);
+                73         return 0;
+                74     &#125;else&#123;
+                75         int x = 0;
+                76         P-&gt;Rear = (P-&gt;Rear-1)%MaxSize;
+                77         x = P-&gt;data[P-&gt;Rear];
+                78         return x;
+                79     &#125;
+                80 &#125;
+                出去的函数；  </code></pre>
+<p>但是写完之后发现出现了些问题，比如-1%4在c语言里结果是-1并不是我们想得到3，所以我们需要写另外一个函数满足我们的运算，此运算规则如下：<br>-1%6 = 5；但是上述代码思想应该是对的；</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -250,162 +330,80 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/30/%E5%85%B3%E4%BA%8E%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-01-30T03:44:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-30</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/02/03/%E6%98%8E%E6%97%A5%E4%BB%BB%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          任务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/30/%E5%85%B3%E4%BA%8E%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于此博客的使用教程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/30/%E5%85%B3%E4%BA%8E%E6%AD%A4%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">关于此博客的使用教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/30/%E6%88%91%E7%9A%84%E9%9A%8F%E7%AC%94/" class="archive-article-date">
-  	<time datetime="2021-01-30T03:11:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/30/%E6%88%91%E7%9A%84%E9%9A%8F%E7%AC%94/">我的随笔</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/22/%E7%AC%AC%E4%BA%8C%E4%B8%AA/" class="archive-article-date">
-  	<time datetime="2021-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/22/%E7%AC%AC%E4%BA%8C%E4%B8%AA/">是小仙铝看的东西</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大饱饱</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/20/%E6%88%91%E7%9A%84%E6%B2%99%E8%8E%8E%E9%9B%95/" class="archive-article-date">
-  	<time datetime="2021-01-20T03:16:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/20/%E6%88%91%E7%9A%84%E6%B2%99%E8%8E%8E%E9%9B%95/">梦最开始的地方</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
+        
+    </div>
+</aside>
 
 
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+<span id="busuanzi_container_page_pv">
+  
           </div>
         </div>
       </div>
@@ -437,8 +435,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
