@@ -6,24 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>任务 | The Private Space</title>
+  <title>数据结构之栈的括号匹配问题 | The Private Space</title>
   
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  <meta name="description" content="这是一篇加密文章。如果你非常好奇，请与我联系。">
+  <meta name="description" content="此篇为用栈+C实现括号匹配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="任务">
-<meta property="og:url" content="http://example.com/2021/02/03/%E6%98%8E%E6%97%A5%E4%BB%BB%E5%8A%A1/index.html">
+<meta property="og:title" content="数据结构之栈的括号匹配问题">
+<meta property="og:url" content="http://example.com/2021/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88%E7%9A%84%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="The Private Space">
-<meta property="og:description" content="这是一篇加密文章。如果你非常好奇，请与我联系。">
+<meta property="og:description" content="此篇为用栈+C实现括号匹配">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-03T13:19:45.000Z">
-<meta property="article:modified_time" content="2021-02-03T14:07:42.651Z">
+<meta property="article:published_time" content="2021-02-05T10:35:38.000Z">
+<meta property="article:modified_time" content="2021-02-05T11:34:38.227Z">
 <meta property="article:author" content="Lirs">
-<meta property="article:tag" content="任务">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="The Private Space" type="application/atom+xml">
@@ -177,38 +177,139 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-明日任务" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-数据结构之栈的括号匹配问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      任务
+      数据结构之栈的括号匹配问题
     </h1>
   
 
         
-        <a href="/2021/02/03/%E6%98%8E%E6%97%A5%E4%BB%BB%E5%8A%A1/" class="archive-article-date">
-  	<time datetime="2021-02-03T13:19:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-03</time>
+        <a href="/2021/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88%E7%9A%84%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-02-05T10:35:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="f98b691c2a2575f7fe7b1317408b5169cd81dbd766073efccaba0d47111e0915">3eff077b3a2118c49f9a58e5c878b152aeb5d28f4bce01415c2c1029d00b2542bda0ba85bb0b1436e832b813dca10625a595167c7996bd72177070c5caaac954eabd4617fddd359f08e2966dbab663b5833c9a2c9de4036c6bfd7a2e2e31cf5c2b5b554a5b12e631e6cf7b06cd1ee360c7db52393d561fda53f88a1470a4ed17374647f342240bbd1272e9e4d18a127dd4a3b5aa8b2bb5a9535f90d6958c45bc8baea3810a7be0064ad84444c90016ba7d4aa12a0734adc15e1f79452a5f0ada52b9cbeadac2169282498a9463cc508b7efef0078d0b927404cfda8974f9bbd230269d8dbe59e97198e412a2198fe8981351552128d6c7c52ef9d3e5afbbf8ed3bd382944cf0f2b49b8b42aa889d024484e3af7272331a44a1df8ca4d6d880f3563a3cabfbbc796034dc42eb941b0845896681fd03841071dad10ab23e39287682433b397d0761dabce5ca47a6b71619cd77be7550d785a6132c968966e6ac30ee8023205b958d24b30fe72d1a2bff7145c0237012bb31c4bf8f9417b29151ab9096c8e15a0d50c73ba3bb746512e90208846079f424253cb565febb5c59b3589b4e80e6271076b07ea51995f783002a0dae37ea5baaf469d37177e01db4c287f510186f34b81b4b538065f9928f865d9790c4f4e456b1f769ee865bf39b1dffa42157c2fb69280609467346d10c781903d8356db57f0c6923024cc198c7eaecc55a5b57e27b8b63fbb8d772360f792699ba43902ec98b668670ab0e28b2fe012ce22ebe195929a2d7caf41f935f12fe10aa92fbbf67c35e20f902eb1eae6b460d9c39e3b510e3940bce091d2659ea2c878469626d786c2aaf2c20ff8a5c484bf0be76fd987501619130f63ebafbd47964877ea464f8ef8f1fbc8943df120d4fdcf3aee39fb5eeae04afd907628def83136603161e32503aa7d2fa8900f08082137e93a906905b2e03ef7bc02c5d9e67783f8448f7080b5179d5b9400ec6bf5c20722bf4db6353d5c04b2f6667e7d44ec64ecde7930b4d93fc8d94ada51d07eaea0e3d97d1fd63c0f445bb7851ad09e5e09845d29d6b9341d8936bb8cc5eef7e0644c775739e27574e385db12ace0138257ddd85b5e6a3a8dd71433741b845c155e755be04695a4057ec9f18ac8aed78a54e37c47500f20aea8e351b80620c000f474b4122990d01face2d93b5004630b50b74ba84084e6215e8adbb2235443a600489f55f1163cca22f55e8247a3612ab1841b0f075b659a191bc7748cf41706f5b5a37552382afdc960c686e5e33ed6103edefc6ed4cbb3dc7b442b7319d67fb1151be85a468125eae1a6a4860b3ddc958ab79ad2d5d5f4cd5c7d07cf10e4d4e6ea301c362abad85d75efee4b633f577305f95d4f00f933fc3f29753d92442d542b0d5da0f89fd49a394e2bdb97d137d401c49a9907f58103b2b6c03014d437516494d60fdcb124a1ab2311ac3adce4e5e6e994cc57a58a17887f289a43ae545bd498508b17b3327b3d475fedda6b9ecb83a9667793d3e1736e70a88411aa080328b30b8643b732c2342942c78e0e4e991a4781cffe59d74bba679121d8fd037c09bfb44f63276994af99cafd981854dc6fd49136f1c8756d7101c1eeab0b8593c32cb57ed5b9dc5c66b2af46de951570441fb0b2e4a6260c54125586333faae7deae2415efc191aa2ae48e946f6bbadf52b35333a097fc4e942da778d3f880f668035a0a2b0d75b882bd86504076d993e34db72490d1345b3ad80ede7d466da462860d663ea23b294ca2f20f4ee8e</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <table>
+<thead>
+<tr>
+<th><strong>此篇为用栈+C实现括号匹配</strong></th>
+</tr>
+</thead>
+</table>
+<a id="more"></a>
+
+<p>源文件存放在 root/Text/Text1/new10.cpp中</p>
+<h2 id="算法的思想和需要准备的函数"><a href="#算法的思想和需要准备的函数" class="headerlink" title="算法的思想和需要准备的函数"></a>算法的思想和需要准备的函数</h2><h2 id="算法的思想"><a href="#算法的思想" class="headerlink" title="算法的思想"></a>算法的思想</h2><p>此思想为王道考研思想，如有侵权请联系删除   </p>
+<p>1.初始化一个空栈，顺序读入括号。<br>2.若是右括号，则与前一括号进行匹配，如果匹配则弹出；如果不匹配则该序列直接不合法。<br>3.若是左括号，则压入栈中<br>4.若遍历完成以后栈中有任何元素这个括号序列都是不匹配的</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>1.我选择了链栈作为实现的存储结构。<br>2.若要实现括号匹配必须有的函数：a.创建一个栈 b.判断栈空 c.遍历栈 d.入栈 e.出栈 f.与栈顶元素进行匹配<br>注：下面具体代码在实现的过程中我们把入栈和出栈以及与栈顶元素进行匹配这三个函数集成为一个函数我们把他命名为PushNode;<br>注：具体实现的头文件h_Public.h为大多数头文件的集合</p>
+<h2 id="具体的C语言的实现"><a href="#具体的C语言的实现" class="headerlink" title="具体的C语言的实现"></a>具体的C语言的实现</h2><pre><code>3 #include&quot;h_Public.h&quot;
+4 
+5 #define MaxSize 20
+6 int tag = 0;//此处的tag的作用是判断出他不匹配的情况可能有多种，我们添加全局变量的话更有利我们跳出某些循环
+7 typedef struct StackNode&#123;
+8     char data;//数据域
+9     struct StackNode *Pnext;//指针域
+10 &#125;StackNode;
+11 //创建一个栈
+12 StackNode *CreatList()&#123;
+13     StackNode *P = (StackNode *)malloc(sizeof(StackNode));
+14     P = NULL;
+15 
+16     return P;
+17 &#125;
+18 
+19 StackNode * PopNode(StackNode *P);
+20 //判断栈是否为空
+21 int IsEmpty(StackNode *P)&#123;
+22     if(P == NULL)&#123;
+23         return 1;
+24     &#125;else&#123;
+25         return 0;
+26     &#125;
+27 &#125;
+上述函数都是最基本的栈的操作，且注意我们这里的栈选取的是没有头结点的栈；所以如果是有头结点的栈的话具体实现略有区别；
+29 //读入一个数据并与之匹配
+30 StackNode *PushNode(StackNode *P,char D)&#123;
+31     
+32     //添加一条指令该指令的作用意在当第一个输入的为）]的时候直接
+33     //让tag = 1；
+34     if(D == &#39;(&#39;||D == &#39;[&#39;)&#123;//此处if判断语句内的函数就是一个入栈函数
+35         StackNode *Q = (StackNode *)malloc(sizeof(StackNode));
+36         Q-&gt;data = D;
+37         Q-&gt;Pnext = P;
+38         P = Q;
+39         //printf(&quot;数据匹配完成\n&quot;); 
+40         return P;
+41     &#125;else&#123;
+42         if(P == NULL)&#123;
+43             tag = 1;
+44             return P;//这里就体会出了上面加入tag的便捷之处
+45         &#125;
+46         if((D == &#39;)&#39;&amp;&amp;P-&gt;data == &#39;(&#39;)||(D == &#39;]&#39;&amp;&amp;P-&gt;data==&#39;[&#39;))
+47             //匹配函数
+48             //这里其实就是一个出栈函数
+49             &#123;
+50                 P = P-&gt;Pnext;
+51                 return P;
+52             &#125;
+53             else
+54             &#123;
+55                 printf(&quot;不匹配\n&quot;);
+56                 tag = 1;
+57                 return P;
+58             &#125;                   
+59         
+60     &#125;
+61     printf(&quot;数据匹配完成\n&quot;);
+62  &#125;
+此函数为本题目中最重要的函数，并且注意我们这个函数是把你输入进去的括号集合一个一个拆分成字符去比较的
+73 int LastNode(StackNode *P)&#123;
+74     if(P == NULL)&#123;
+75         printf(&quot;合法的序列\n&quot;);
+76         return 1;
+77     &#125;else&#123;
+78         printf(&quot;非法的序列\n&quot;);
+79         tag = 1;
+80         return 0;
+81     &#125;
+82 &#125;
+这个函数为思想中的最后一个函数，即在你进行完遍历的时候用于检查你的栈内是否为空，测试的时候做个人不要一上来直接给个右括号，虽然我们上面第42行的代码给出了解决方案，但是还是有人给奇奇怪怪的数值进去；
+最好就给个正常的ex：（）[]这种的或者[()]这种的；
+85 int main()&#123;
+86     StackNode *Q = CreatList();
+87     char Data[MaxSize];
+88     printf(&quot;请输入你要判断的空格序列:&quot;);scanf(&quot;%s&quot;,Data);
+89     //一个遍历把上述输入的东西都写到栈内
+90     int a = 0;
+✹  91     while(a&gt;-1&amp;&amp;a&lt;(strlen(Data) ))&#123;
+92         //printf(&quot;==%d==\n&quot;,strlen(Data));
+93        Q =  PushNode(Q,Data[a]);
+94         a++;
+95         if(tag == 1)&#123;
+96             printf(&quot;不满足\n&quot;);
+97             return 0;
+98         &#125;
+99     &#125; 
+100     if(IsEmpty(Q)==1)&#123;
+101         printf(&quot;是匹配的\n&quot;);
+102         return 1;
+103     &#125;else&#123;
+104         printf(&quot;不匹配\n&quot;);
+105         return 0;
+106     &#125;
+107 &#125;           
+这是主函数，主函数86到89以及后面的循环，都是将你输入进行进行拆分的操作。
+此处用strlen是为了算出来你输入的一共有多少字符这样可以加快判断的时间；
+最后一个if是代替了LastNode函数用途跟LastNode是一样的；        </code></pre>
+
       
 
       
@@ -242,7 +343,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">任务</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -262,8 +363,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2021/02/03/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">双端队列</div>
+    <a href="/2021/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E4%B8%8E%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构之串的基本思想与实现</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -290,7 +391,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E6%80%9D%E6%83%B3%E5%92%8C%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">算法的思想和需要准备的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">算法的思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">3.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84C%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">具体的C语言的实现</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -419,7 +520,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习-数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -427,11 +528,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">大饱饱</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大饱饱</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
