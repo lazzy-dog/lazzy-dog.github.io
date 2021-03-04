@@ -21,7 +21,7 @@
 <meta property="og:description" content="此篇需要结合OneNote上的笔记进行阅读">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-05T02:39:23.000Z">
-<meta property="article:modified_time" content="2021-02-05T10:33:14.954Z">
+<meta property="article:modified_time" content="2021-02-11T02:36:26.950Z">
 <meta property="article:author" content="Lirs">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -210,9 +210,27 @@
 <h1 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h1><p>1.KMP算法的灵魂就是找新字，老字在之前的比较的时候我们都是知道的所以我们找新字即可，且KMP的核心就是主串是不回溯的只有子串才回溯。<br>（问题：我们在知道不匹配跳过的原则后，假如我们要匹配的东西是带有重复的呢；）<br>解决：KMP算法虽然主串是不回溯的但是在第一次匹配失败后要扫描匹配的主串看是否有与子串首字符相同的字符，我们从那里开始而不是直接跳到匹配失败的地方；且我们要注意：跳的这个长度刚好是，失败的位置的前面这个字符串最长的相同真前缀和真后缀的长度；且总是这样；</p>
 <p>手动制作Ntext表其实跟上面是一样的，我们还是<br>需要比较他的真前缀和真后缀并且找到最大的真前缀和真后缀<br>写在他的Next表中；</p>
 <hr>
-<p>望江楼上望江江流的真后缀是：最后单独的字然后加上<br>流，江流，江江流，望江江流，上望江江流。。。。<br>真前缀是一样的不存在组合必读按照顺序；<br>且我们要注意通俗的来说后缀的最后一个字一定是要的，<br>前缀的第一个字一定是要的；如果没有最后一个字的话是叫子串，但是有最后一个字的才能叫后缀；     </p>
+<p>望江楼上望江江流的真后缀是：最后单独的字然后加上前面且不全等于他的字<br>流，江流，江江流，望江江流，上望江江流。。。。<br>真前缀是一样的不存在组合必读按照顺序，且注意前缀一定要包含第一个字；<br>且我们要注意通俗的来说后缀的最后一个字一定是要的，<br>前缀的第一个字一定是要的；如果没有最后一个字的话是叫子串，但是有最后一个字的才能叫后缀；     </p>
 <hr>
 <p>注：本章节的内容必须结合OneNote上的笔记和后序做的笔记去看，因为大部分东西都在OneNote上面；</p>
+<hr>
+<h2 id="下面是本章主要代码的实现"><a href="#下面是本章主要代码的实现" class="headerlink" title="下面是本章主要代码的实现"></a>下面是本章主要代码的实现</h2><p>new12.1蛮力匹配算法。<br>首先遇到的问题就是返回值的问题，我们匹配算法是为了求在主串中第几位的，也就是说返回的是个int类型的变量；<br>且要传入的是两个串一个是主串一个是匹配的串；<br>接下来的蛮力匹配算法的思想等同于我们上面写的Index的思想； </p>
+<pre><code>8 //new12.1蛮力匹配算法
+9 int InDex(char * chang,char * duan)&#123;
+10     int Ichang = strlen(chang);
+11     int Iduan = strlen(duan);
+12     int TagChang = 0;int  TagDuan = 0;
+13     while((TagChang &lt; Ichang )&amp;&amp;(TagDuan &lt; Iduan))&#123;
+14         if(chang[TagChang] == duan[TagDuan])&#123;
+15             TagDuan++;
+16             TagChang++;
+17         &#125;else&#123;
+18             TagDuan = 0;
+19             TagChang = TagChang - (TagDuan - 1 );
+20         &#125; 
+21     &#125; 
+22     return TagDuan == Iduan?TagChang - TagDuan:-1;
+23 &#125;</code></pre>
 
       
 
@@ -304,7 +322,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">串的基本操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%B2%E6%93%8D%E4%BD%9C%E7%9A%84%E5%BC%95%E7%94%B3"><span class="toc-number">2.</span> <span class="toc-text">串操作的引申</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">KMP算法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">串的基本操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%B2%E6%93%8D%E4%BD%9C%E7%9A%84%E5%BC%95%E7%94%B3"><span class="toc-number">2.</span> <span class="toc-text">串操作的引申</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">KMP算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E6%9C%AC%E7%AB%A0%E4%B8%BB%E8%A6%81%E4%BB%A3%E7%A0%81%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.</span> <span class="toc-text">下面是本章主要代码的实现</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
